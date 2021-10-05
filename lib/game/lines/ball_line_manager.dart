@@ -47,7 +47,7 @@ class BallLineManager {
     Random rnd = Random();
     final randomWidth = rnd.nextInt(100) + 50;
     final platform = BallLine(
-      shape: RoundedRectangle(radius: 8, size: Vector2(randomWidth.toDouble(), 20)),
+      shape: RoundedRectangle(radius: 8, size: Vector2(randomWidth.toDouble(), 10)),
       shapePaint: Paint()..color = Colors.blueAccent,
       game: game,
       x: game.canvasSize.x + 100,

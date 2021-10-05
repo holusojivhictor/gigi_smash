@@ -1,3 +1,4 @@
+import 'package:flame/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/components.dart';
 import 'package:flame/particles.dart';
@@ -49,7 +50,7 @@ class SessionManager extends BaseComponent {
     healthLeftComponent.text = 'health: $_healthLeft';
 
     if (_healthLeft <= 0) {
-      game.overlays.add(pauseMenu);
+      game.overlays.add(startMenu);
       game.pauseEngine();
     }
     super.update(dt);

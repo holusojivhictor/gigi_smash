@@ -27,7 +27,7 @@ class Ball extends SpriteComponent with Hitbox, Collidable {
   @override
   Future<void>? onLoad() async {
     sprite = await Sprite.load('Logo_2.png');
-    size = Vector2.all(128.0);
+    size = Vector2.all(96.0);
     this.anchor = Anchor.center;
     return super.onLoad();
   }
@@ -76,7 +76,7 @@ class Ball extends SpriteComponent with Hitbox, Collidable {
             return AcceleratedParticle(
               acceleration: randomVector2(),
               speed: randomVector2(),
-              position: (this.position.clone() + Vector2(0, this.size.y / 1.5)),
+              position: (position.clone() + Vector2(0, size.y / 1.5)),
               child: ComputedParticle(
                 renderer: (canvas, particle) => canvas.drawCircle(
                   Offset.zero,
@@ -91,6 +91,7 @@ class Ball extends SpriteComponent with Hitbox, Collidable {
     );
   }
 
+  @override
   void onCollisionEnd(Collidable other) {
     currentlyColliding.remove(other);
   }

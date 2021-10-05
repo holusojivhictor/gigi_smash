@@ -2,9 +2,65 @@ import 'dart:math';
 
 import 'package:flame/geometry.dart';
 import 'package:flame/components.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
 import 'package:gigi_smash/game/gigi_smash.dart';
+
+import '../game_colors.dart';
+
+class LevelInfo {
+  final String text;
+  final double speed;
+  LevelInfo({required this.text, required this.speed});
+}
+
+List<LevelInfo> levelInfo = [
+  LevelInfo(
+    text: "Easy",
+    speed: 3,
+  ),
+  LevelInfo(
+    text: "Medium",
+    speed: 5,
+  ),
+  LevelInfo(
+    text: "Hard",
+    speed: 8,
+  ),
+];
+
+class LevelButton extends StatelessWidget {
+  const LevelButton({Key? key, required this.levelInfo, required this.press, required this.levelSpeed}) : super(key: key);
+  final LevelInfo levelInfo;
+  final double levelSpeed;
+  final GestureTapCallback press;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        elevation: 0,
+        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 64),
+        primary: GameColors.primary,
+      ),
+      onPressed: press,
+      child: Text(levelInfo.text),
+    );
+  }
+}
+
+class Level {
+  final double speed;
+  Level({required this.speed});
+}
+
+List<Level> level = [
+  Level(speed: 3),
+  Level(speed: 5),
+  Level(speed: 8),
+];
 
 class BallLine extends ShapeComponent with Hitbox, Collidable {
   BallLine({
@@ -20,11 +76,11 @@ class BallLine extends ShapeComponent with Hitbox, Collidable {
   }
 
   final GigiSmash game;
-  final double speed = 3;
+  // final double speed = 3;
 
   @override
   void update(double dt) {
-    position.x -= speed;
+    position.x -= level[1].speed;
     super.update(dt);
   }
 }
